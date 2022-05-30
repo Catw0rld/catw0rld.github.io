@@ -6,17 +6,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="0x1 前言通过Shiro拿到权限做好了代理进内网,简单扫了下资产很少,过程中碰见一台IIS低权限用户,常见漏洞提不上权,最后发现不同服务所属权限拿下最高权限">
+    <meta name="description" content="0x1 前言通过Shiro拿到权限做好了代理进内网,内网渗透过程中碰见一台IIS低权限用户,有数字软件防护,常见漏洞提不上权,最后发现不同服务所属权限拿下最高权限 0x2 Fuzz文件上传web功能点都点了一遍,看burp history找一些参数接口的时候注意到了几个目录">
 <meta property="og:type" content="article">
 <meta property="og:title" content="另类的权限提升">
 <meta property="og:url" content="https://catw0rld.github.io/2022/05/30/%E5%8F%A6%E7%B1%BB%E7%9A%84%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/index.html">
 <meta property="og:site_name" content="catw0rld">
-<meta property="og:description" content="0x1 前言通过Shiro拿到权限做好了代理进内网,简单扫了下资产很少,过程中碰见一台IIS低权限用户,常见漏洞提不上权,最后发现不同服务所属权限拿下最高权限">
+<meta property="og:description" content="0x1 前言通过Shiro拿到权限做好了代理进内网,内网渗透过程中碰见一台IIS低权限用户,有数字软件防护,常见漏洞提不上权,最后发现不同服务所属权限拿下最高权限 0x2 Fuzz文件上传web功能点都点了一遍,看burp history找一些参数接口的时候注意到了几个目录">
 <meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://catw0rld.github.io/%E5%8F%A6%E7%B1%BB%E7%9A%84%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/1.jpg">
 <meta property="article:published_time" content="2022-05-30T13:10:50.424Z">
-<meta property="article:modified_time" content="2022-05-30T13:20:06.776Z">
+<meta property="article:modified_time" content="2022-05-30T13:31:06.772Z">
 <meta property="article:author" content="catw0rld">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://catw0rld.github.io/%E5%8F%A6%E7%B1%BB%E7%9A%84%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/1.jpg">
     
     
       
@@ -95,7 +97,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x1-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">0x1 前言</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x1-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">0x1 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x2-Fuzz%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">2.</span> <span class="toc-text">0x2 Fuzz文件上传</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -134,7 +136,8 @@
   
 
   <div class="content" itemprop="articleBody">
-    <h2 id="0x1-前言"><a href="#0x1-前言" class="headerlink" title="0x1 前言"></a>0x1 前言</h2><p>通过Shiro拿到权限做好了代理进内网,简单扫了下资产很少,过程中碰见一台IIS低权限用户,常见漏洞提不上权,最后发现不同服务所属权限拿下最高权限</p>
+    <h2 id="0x1-前言"><a href="#0x1-前言" class="headerlink" title="0x1 前言"></a>0x1 前言</h2><p>通过Shiro拿到权限做好了代理进内网,内网渗透过程中碰见一台IIS低权限用户,有数字软件防护,常见漏洞提不上权,最后发现不同服务所属权限拿下最高权限</p>
+<h2 id="0x2-Fuzz文件上传"><a href="#0x2-Fuzz文件上传" class="headerlink" title="0x2 Fuzz文件上传"></a>0x2 Fuzz文件上传</h2><p>web功能点都点了一遍,看burp history找一些参数接口的时候注意到了几个目录<br><img src="/./%E5%8F%A6%E7%B1%BB%E7%9A%84%E6%9D%83%E9%99%90%E6%8F%90%E5%8D%87/1.jpg"></p>
 
   </div>
 </article>
@@ -158,7 +161,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x1-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">0x1 前言</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x1-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">0x1 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x2-Fuzz%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0"><span class="toc-number">2.</span> <span class="toc-text">0x2 Fuzz文件上传</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
