@@ -9,7 +9,7 @@
     <meta name="description" content="应用waf拦截了一些关键字符串 - in,like,regexp,rlike,substring 等通过形似 1’xor(1&#x3D;1)xor’ &#x2F; 1’xor(case+when(1&#x3D;1)+then+exp(710)+else+0+end)xor’ 等几个payload判断后端使用Mysql数据库正常length得到数据库长度为20 很奇怪的是 使用mid,substr,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mysql在无截断函数场景下注入学习">
-<meta property="og:url" content="https://catw0rld.github.io/2022/11/15/Mysql_bypass/index.html">
+<meta property="og:url" content="https://catw0rld.github.io/2022/11/15/1/index.html">
 <meta property="og:site_name" content="catw0rld">
 <meta property="og:description" content="应用waf拦截了一些关键字符串 - in,like,regexp,rlike,substring 等通过形似 1’xor(1&#x3D;1)xor’ &#x2F; 1’xor(case+when(1&#x3D;1)+then+exp(710)+else+0+end)xor’ 等几个payload判断后端使用Mysql数据库正常length得到数据库长度为20 很奇怪的是 使用mid,substr,">
 <meta property="og:locale" content="zh_CN">
@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image4.jpg">
 <meta property="og:image" content="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image5.jpg">
 <meta property="article:published_time" content="2022-11-14T21:32:05.835Z">
-<meta property="article:modified_time" content="2022-11-15T10:21:02.246Z">
+<meta property="article:modified_time" content="2023-01-08T11:55:25.608Z">
 <meta property="article:author" content="catw0rld">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image1.jpg">
@@ -90,17 +90,17 @@
     <br/>
     <div id="share" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://catw0rld.github.io/2022/11/15/Mysql_bypass/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&text=Mysql在无截断函数场景下注入学习"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&is_video=false&description=Mysql在无截断函数场景下注入学习"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Mysql在无截断函数场景下注入学习&body=Check out this article: https://catw0rld.github.io/2022/11/15/Mysql_bypass/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&name=Mysql在无截断函数场景下注入学习&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&t=Mysql在无截断函数场景下注入学习"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://catw0rld.github.io/2022/11/15/1/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://catw0rld.github.io/2022/11/15/1/&text=Mysql在无截断函数场景下注入学习"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://catw0rld.github.io/2022/11/15/1/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://catw0rld.github.io/2022/11/15/1/&is_video=false&description=Mysql在无截断函数场景下注入学习"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Mysql在无截断函数场景下注入学习&body=Check out this article: https://catw0rld.github.io/2022/11/15/1/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://catw0rld.github.io/2022/11/15/1/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://catw0rld.github.io/2022/11/15/1/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://catw0rld.github.io/2022/11/15/1/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://catw0rld.github.io/2022/11/15/1/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://catw0rld.github.io/2022/11/15/1/&name=Mysql在无截断函数场景下注入学习&description="><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://catw0rld.github.io/2022/11/15/1/&t=Mysql在无截断函数场景下注入学习"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -181,17 +181,17 @@
 
     <div id="share-footer" style="display: none">
       <ul>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://catw0rld.github.io/2022/11/15/Mysql_bypass/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&text=Mysql在无截断函数场景下注入学习"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&is_video=false&description=Mysql在无截断函数场景下注入学习"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" href="mailto:?subject=Mysql在无截断函数场景下注入学习&body=Check out this article: https://catw0rld.github.io/2022/11/15/Mysql_bypass/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&name=Mysql在无截断函数场景下注入学习&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
-  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://catw0rld.github.io/2022/11/15/Mysql_bypass/&t=Mysql在无截断函数场景下注入学习"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://catw0rld.github.io/2022/11/15/1/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://catw0rld.github.io/2022/11/15/1/&text=Mysql在无截断函数场景下注入学习"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://catw0rld.github.io/2022/11/15/1/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://catw0rld.github.io/2022/11/15/1/&is_video=false&description=Mysql在无截断函数场景下注入学习"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Mysql在无截断函数场景下注入学习&body=Check out this article: https://catw0rld.github.io/2022/11/15/1/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://catw0rld.github.io/2022/11/15/1/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://catw0rld.github.io/2022/11/15/1/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://catw0rld.github.io/2022/11/15/1/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://catw0rld.github.io/2022/11/15/1/&title=Mysql在无截断函数场景下注入学习"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://catw0rld.github.io/2022/11/15/1/&name=Mysql在无截断函数场景下注入学习&description="><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://catw0rld.github.io/2022/11/15/1/&t=Mysql在无截断函数场景下注入学习"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
 </ul>
 
     </div>
@@ -212,7 +212,7 @@
     Copyright &copy;
     
     
-    2022
+    2023
     catw0rld
   </div>
   <div class="footer-right">
