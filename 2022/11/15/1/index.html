@@ -6,12 +6,12 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="HandheldFriendly" content="True">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
-    <meta name="description" content="应用waf拦截了一些关键字符串 - in,like,regexp,rlike,substring 等通过形似 1’xor(1&#x3D;1)xor’ &#x2F; 1’xor(case+when(1&#x3D;1)+then+exp(710)+else+0+end)xor’ 等几个payload判断后端使用Mysql数据库正常length得到数据库长度为20 很奇怪的是 使用mid,substr,">
+    <meta name="description" content="0x0 前言应用waf拦截了一些关键字符串 - in,like,regexp,rlike,substring 等通过形似 1’xor(1&#x3D;1)xor’ &#x2F; 1’xor(case+when(1&#x3D;1)+then+exp(710)+else+0+end)xor’ 等几个payload判断后端使用Mysql数据库正常length得到数据库长度为20 很奇怪的是 使用mid,s">
 <meta property="og:type" content="article">
 <meta property="og:title" content="注入逐位猜解方式方式学习">
 <meta property="og:url" content="https://catw0rld.github.io/2022/11/15/1/index.html">
 <meta property="og:site_name" content="catw0rld">
-<meta property="og:description" content="应用waf拦截了一些关键字符串 - in,like,regexp,rlike,substring 等通过形似 1’xor(1&#x3D;1)xor’ &#x2F; 1’xor(case+when(1&#x3D;1)+then+exp(710)+else+0+end)xor’ 等几个payload判断后端使用Mysql数据库正常length得到数据库长度为20 很奇怪的是 使用mid,substr,">
+<meta property="og:description" content="0x0 前言应用waf拦截了一些关键字符串 - in,like,regexp,rlike,substring 等通过形似 1’xor(1&#x3D;1)xor’ &#x2F; 1’xor(case+when(1&#x3D;1)+then+exp(710)+else+0+end)xor’ 等几个payload判断后端使用Mysql数据库正常length得到数据库长度为20 很奇怪的是 使用mid,s">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image1.jpg">
 <meta property="og:image" content="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image2.jpg">
@@ -19,7 +19,7 @@
 <meta property="og:image" content="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image4.jpg">
 <meta property="og:image" content="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image5.jpg">
 <meta property="article:published_time" content="2022-11-14T21:32:05.835Z">
-<meta property="article:modified_time" content="2023-02-09T12:45:21.409Z">
+<meta property="article:modified_time" content="2023-02-19T05:36:52.486Z">
 <meta property="article:author" content="catw0rld">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image1.jpg">
@@ -105,7 +105,7 @@
 
     </div>
     <div id="toc">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x1"><span class="toc-number">1.</span> <span class="toc-text">0x1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x2"><span class="toc-number">2.</span> <span class="toc-text">0x2</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x0-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">0x0 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x1"><span class="toc-number">2.</span> <span class="toc-text">0x1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x2"><span class="toc-number">3.</span> <span class="toc-text">0x2</span></a></li></ol>
     </div>
   </span>
 </div>
@@ -144,7 +144,7 @@
   
 
   <div class="content" itemprop="articleBody">
-    <link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><p>应用waf拦截了一些关键字符串 - in,like,regexp,rlike,substring 等<br>通过形似 1’xor(1&#x3D;1)xor’ &#x2F; 1’xor(case+when(1&#x3D;1)+then+exp(710)+else+0+end)xor’ 等几个payload判断后端使用Mysql数据库<br>正常length得到数据库长度为20 很奇怪的是 使用mid,substr,left等能查找到的截断函数,字符串操作函数 后端都会报错,无法正常执行<br><a data-fancybox="gallery" data-src="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image1.jpg" data-caption=""><a target="_blank" rel="noopener" href="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image1.jpg" class="gallery-item"><img src="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image1.jpg"></a></a></p>
+    <link rel="stylesheet" type="text/css" href="https://fastly.jsdelivr.net/lightgallery.js/1.0.1/css/lightgallery.min.css" /><div class=".article-gallery"><h2 id="0x0-前言"><a href="#0x0-前言" class="headerlink" title="0x0 前言"></a>0x0 前言</h2><p>应用waf拦截了一些关键字符串 - in,like,regexp,rlike,substring 等<br>通过形似 1’xor(1&#x3D;1)xor’ &#x2F; 1’xor(case+when(1&#x3D;1)+then+exp(710)+else+0+end)xor’ 等几个payload判断后端使用Mysql数据库<br>正常length得到数据库长度为20 很奇怪的是 使用mid,substr,left等能查找到的截断函数,字符串操作函数 后端都会报错,无法正常执行<br><a data-fancybox="gallery" data-src="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image1.jpg" data-caption=""><a target="_blank" rel="noopener" href="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image1.jpg" class="gallery-item"><img src="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image1.jpg"></a></a></p>
 <h2 id="0x1"><a href="#0x1" class="headerlink" title="0x1"></a>0x1</h2><p>这种场景也已经有师傅碰见并且绕过了(<a target="_blank" rel="noopener" href="https://forum.90sec.com/t/topic/1597),%E8%B7%9F%E7%9D%80%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95%E4%B8%80%E4%B8%8B">https://forum.90sec.com/t/topic/1597),跟着学习记录一下</a><br>Mysql中,利用字符串比较时会逐位比较字符的ascii码<br><a data-fancybox="gallery" data-src="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image2.jpg" data-caption=""><a target="_blank" rel="noopener" href="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image2.jpg" class="gallery-item"><img src="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image2.jpg"></a></a><br>字符b的ascii码大于a,条件不成立返回异常<br>也就是当所给字符的ascii码小于a的ascii即返回真,等于a时也返回真(在没猜解到最后一位前)<br>即 ‘abc’&gt;’{小于或等于a的ascii码}’ -&gt;返回真<br>那就可以用这个特性提取所有小于a的可见字符ascii码 取最大值转换为字符串即可得到我们所需要的字符<br><a data-fancybox="gallery" data-src="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image3.jpg" data-caption=""><a target="_blank" rel="noopener" href="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image3.jpg" class="gallery-item"><img src="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image3.jpg"></a></a></p>
 <h2 id="0x2"><a href="#0x2" class="headerlink" title="0x2"></a>0x2</h2><p>在猜解到最后一位字符的时候还是用的’&gt;’进行比较,导致闹了一个小乌龙<br><a data-fancybox="gallery" data-src="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image4.jpg" data-caption=""><a target="_blank" rel="noopener" href="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image4.jpg" class="gallery-item"><img src="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image4.jpg"></a></a><br>比较最后一位字符c,字符b的ascii码比c小一位,导致之前的payload到字符b就截止返回真了,写的脚本也是判断页面的true和false<br>导致一直没有发现问题,最后就得到了’abb’这样的结果</p>
 <p>end<br><a data-fancybox="gallery" data-src="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image5.jpg" data-caption=""><a target="_blank" rel="noopener" href="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image5.jpg" class="gallery-item"><img src="https://catw0rld-blog.oss-cn-hangzhou.aliyuncs.com/image5.jpg"></a></a></p>
@@ -176,7 +176,7 @@
     </div>
 
     <div id="toc-footer" style="display: none">
-      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x1"><span class="toc-number">1.</span> <span class="toc-text">0x1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x2"><span class="toc-number">2.</span> <span class="toc-text">0x2</span></a></li></ol>
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#0x0-%E5%89%8D%E8%A8%80"><span class="toc-number">1.</span> <span class="toc-text">0x0 前言</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x1"><span class="toc-number">2.</span> <span class="toc-text">0x1</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#0x2"><span class="toc-number">3.</span> <span class="toc-text">0x2</span></a></li></ol>
     </div>
 
     <div id="share-footer" style="display: none">
